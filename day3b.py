@@ -6,7 +6,7 @@ def adjacent_digit(i, j, d): # d = direction
             else:
                 return engine_list[i][j+d] + adjacent_digit(i, j+d, d)
         except IndexError:
-            return ""
+            return engine_list[i][j+d]
     else:
         return ""
 
@@ -94,8 +94,8 @@ with open("day3_data.txt") as engine:
                                 break
                     k += 1
 
-                print(pair)
-                
+                print(i, pair)
+
                 if pair != None:
                     answer += int(pair[0]) * int(pair[1])
 
