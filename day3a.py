@@ -9,41 +9,49 @@ def is_next_digit(line, i):
 
 def check_surroundings(engine_list, i, j, k):
     checklist = []
-    try:
-        if j+k-1 != -1:
-            checklist.append(engine_list[i][j+k-1])
-    except IndexError:
-        pass
-    try:
-        checklist.append(engine_list[i][j+k+1])
-    except IndexError:
-        pass
-    try:
-        checklist.append(engine_list[i+1][j+k])
-    except IndexError:
-        pass
-    try:
-        if i-1 != -1:
-            checklist.append(engine_list[i-1][j+k])
-    except IndexError:
-        pass
+    # Topleft
     try:
         if i-1 != -1 and j+k-1 != -1:
             checklist.append(engine_list[i-1][j+k-1])
     except IndexError:
         pass
+    # Top
     try:
-        checklist.append(engine_list[i+1][j+k+1])
+        if i-1 != -1:
+            checklist.append(engine_list[i-1][j+k])
     except IndexError:
         pass
+    # Topright
     try:
         if i-1 != -1:
             checklist.append(engine_list[i-1][j+k+1])
     except IndexError:
         pass
+    # Bottom left
     try:
         if j+k-1 != -1:
             checklist.append(engine_list[i+1][j+k-1])
+    except IndexError:
+        pass
+    # Bottom
+    try:
+        checklist.append(engine_list[i+1][j+k])
+    except IndexError:
+        pass
+    # Bottom right
+    try:
+        checklist.append(engine_list[i+1][j+k+1])
+    except IndexError:
+        pass
+    # Left
+    try:
+        if j+k-1 != -1:
+            checklist.append(engine_list[i][j+k-1])
+    except IndexError:
+        pass
+    # Right
+    try:
+        checklist.append(engine_list[i][j+k+1])
     except IndexError:
         pass
 
@@ -62,7 +70,7 @@ with open("day3_data.txt") as engine:
             cond = False
             if line[j].isdigit() == True:
                 number = line[j] + is_next_digit(line, j)
-                
+
                 for k in range(len(number)):
                     checklist = check_surroundings(engine_list, i, j, k)
 
